@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
+import { assetPath } from "../utils/assets.js";
 
 function ArrowIcon() {
   return (
@@ -49,7 +50,7 @@ function ProjectImage({ src, alt, className = "", fallbackText = "Preview coming
     <img
       {...props}
       className={className}
-      src={currentSrc}
+      src={assetPath(currentSrc)}
       alt={alt}
       onError={() => {
         const fallback = imageFallbackFor(currentSrc);
@@ -77,7 +78,7 @@ function ProjectVideo({ src, poster, title }) {
 
     const controller = new AbortController();
 
-    fetch(currentSrc, { method: "HEAD", signal: controller.signal })
+    fetch(assetPath(currentSrc), { method: "HEAD", signal: controller.signal })
       .then((response) => {
         if (response.ok) {
           setStatus("ready");
@@ -121,7 +122,7 @@ function ProjectVideo({ src, poster, title }) {
       className="case-video"
       controls
       preload="metadata"
-      poster={poster}
+      poster={assetPath(poster)}
       aria-label={`${title} demo video`}
       onError={() => {
         const fallback = videoFallbackFor(currentSrc);
@@ -132,7 +133,7 @@ function ProjectVideo({ src, poster, title }) {
         setStatus("error");
       }}
     >
-      <source src={currentSrc} type="video/mp4" />
+      <source src={assetPath(currentSrc)} type="video/mp4" />
     </video>
   );
 }

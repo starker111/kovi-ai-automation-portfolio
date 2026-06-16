@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import ProjectCaseStudyModal from "./components/ProjectCaseStudyModal.jsx";
 import { projectFilters, projects } from "./data/projects.js";
+import { assetPath } from "./utils/assets.js";
 
 const contact = {
   email: "sjaswanth486@gmail.com",
@@ -241,7 +242,7 @@ function SafeProjectImage({ src, alt, ...props }) {
   return (
     <img
       {...props}
-      src={currentSrc}
+      src={assetPath(currentSrc)}
       alt={alt}
       onError={() => {
         const fallback = projectImageFallbackFor(currentSrc);
@@ -471,7 +472,7 @@ function Hero() {
             <a className="button button--dark" href="#work" onClick={(event) => scrollToSection(event, "work")}>
               View Work <ArrowIcon />
             </a>
-            <a className="button button--light" href="/resume.pdf" target="_blank" rel="noreferrer">
+            <a className="button button--light" href={assetPath("/resume.pdf")} target="_blank" rel="noreferrer">
               View Resume <ArrowIcon />
             </a>
             <a className="button button--light" href="#contact" onClick={(event) => scrollToSection(event, "contact")}>
@@ -489,7 +490,7 @@ function Hero() {
           {prefersReducedMotion ? (
             <img
               className="hero-video-poster"
-              src="/images/hero-intro-poster.jpg"
+              src={assetPath("/images/hero-intro-poster.jpg")}
               alt=""
               aria-hidden="true"
               width="1672"
@@ -504,10 +505,10 @@ function Hero() {
               loop
               playsInline
               preload="metadata"
-              poster="/images/hero-intro-poster.jpg"
+              poster={assetPath("/images/hero-intro-poster.jpg")}
               aria-hidden="true"
             >
-              <source src="/videos/hero-intro-desktop.mp4" type="video/mp4" />
+              <source src={assetPath("/videos/hero-intro-desktop.mp4")} type="video/mp4" />
             </video>
           )}
         </div>
@@ -661,7 +662,7 @@ function About() {
       <div className="container about-grid">
         <figure className="about-portrait portfolio-image-frame" data-reveal>
           <img
-            src="/images/about-working.jpg"
+            src={assetPath("/images/about-working.jpg")}
             alt="Kovi Varun Jaswanth Sai working on AI automation systems"
             width="1672"
             height="941"
@@ -902,10 +903,10 @@ function Resume() {
             LLM projects.
           </p>
           <div className="resume-actions">
-            <a className="button button--dark" href="/resume.pdf" target="_blank" rel="noreferrer">
+            <a className="button button--dark" href={assetPath("/resume.pdf")} target="_blank" rel="noreferrer">
               View Resume <ArrowIcon />
             </a>
-            <a className="button button--light" href="/resume.pdf" download>
+            <a className="button button--light" href={assetPath("/resume.pdf")} download>
               Download Resume <ArrowIcon />
             </a>
           </div>
@@ -1045,7 +1046,7 @@ function Footer() {
             <span>Profiles</span>
             <a href={contact.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
             <a href={contact.github} target="_blank" rel="noreferrer">GitHub</a>
-            <a href="/resume.pdf" target="_blank" rel="noreferrer">Resume</a>
+            <a href={assetPath("/resume.pdf")} target="_blank" rel="noreferrer">Resume</a>
           </div>
           <div>
             <span>Focus</span>
