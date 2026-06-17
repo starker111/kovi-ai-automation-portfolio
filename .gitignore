@@ -10,3 +10,5 @@ test-results
 *.log
 
 .vercel
+public/videos/hero-intro-desktop.mp4
+public/videos/*.mp4

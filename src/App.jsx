@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import ProjectCaseStudyModal from "./components/ProjectCaseStudyModal.jsx";
+import { HERO_VIDEO_URL } from "./config/media.js";
 import { projects } from "./data/projects.js";
 
 const contact = {
@@ -451,6 +452,7 @@ function Header() {
 
 function Hero() {
   const prefersReducedMotion = usePrefersReducedMotion();
+  const heroPosterAlt = "Kovi Varun Jaswanth Sai AI Automation Engineer portfolio hero";
 
   return (
     <section className="hero" id="hero">
@@ -493,12 +495,11 @@ function Hero() {
         </div>
 
         <div className="hero-video-panel hero-reveal hero-reveal--delay-2">
-          {prefersReducedMotion ? (
+          {prefersReducedMotion || !HERO_VIDEO_URL ? (
             <img
               className="hero-video-poster"
               src="/images/hero-intro-poster.jpg"
-              alt=""
-              aria-hidden="true"
+              alt={heroPosterAlt}
               width="1672"
               height="941"
               fetchPriority="high"
@@ -514,7 +515,7 @@ function Hero() {
               poster="/images/hero-intro-poster.jpg"
               aria-hidden="true"
             >
-              <source src="/videos/hero-intro-desktop.mp4" type="video/mp4" />
+              <source src={HERO_VIDEO_URL} type="video/mp4" />
             </video>
           )}
         </div>
