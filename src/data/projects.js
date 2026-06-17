@@ -1,11 +1,3 @@
-export const projectFilters = [
-  { label: "All", value: "All" },
-  { label: "RAG", value: "RAG" },
-  { label: "Workflow", value: "Workflow" },
-  { label: "Email", value: "Email" },
-  { label: "HR", value: "HR" },
-];
-
 export const projects = [
   {
     number: "01",

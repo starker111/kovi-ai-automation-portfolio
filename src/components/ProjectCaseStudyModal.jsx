@@ -1,5 +1,4 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { assetPath } from "../utils/assets.js";
 
 function ArrowIcon() {
   return (
@@ -11,26 +10,6 @@ function ArrowIcon() {
 
 function isUsableUrl(value) {
   return typeof value === "string" && value.trim().length > 0;
-}
-
-function imageFallbackFor(src) {
-  if (!src) return "";
-  const interfaceMatch = src.match(/\/images\/projects\/interface\/(.+)-interface\.jpg$/);
-  if (interfaceMatch) return `/images/projects/${interfaceMatch[1]}.jpg`;
-  const workflowMatch = src.match(/\/images\/projects\/workflows\/(.+)-workflow\.jpg$/);
-  if (workflowMatch) return `/images/projects/${workflowMatch[1]}-workflow.jpg`;
-  const coverMatch = src.match(/\/images\/projects\/covers\/(.+)\.jpg$/);
-  if (coverMatch) return `/projects/${coverMatch[1]}.png`;
-  if (src.endsWith(".jpg")) return src.replace(/\.jpg$/, ".png");
-  return "";
-}
-
-function videoFallbackFor(src) {
-  if (!src) return "";
-  if (src.startsWith("/videos/projects/")) {
-    return src.replace("/videos/projects/", "/images/projects/");
-  }
-  return "";
 }
 
 function ProjectImage({ src, alt, className = "", fallbackText = "Preview coming soon.", ...props }) {
@@ -50,14 +29,9 @@ function ProjectImage({ src, alt, className = "", fallbackText = "Preview coming
     <img
       {...props}
       className={className}
-      src={assetPath(currentSrc)}
+      src={currentSrc}
       alt={alt}
       onError={() => {
-        const fallback = imageFallbackFor(currentSrc);
-        if (fallback && fallback !== currentSrc) {
-          setCurrentSrc(fallback);
-          return;
-        }
         setHasError(true);
       }}
     />
@@ -78,16 +52,10 @@ function ProjectVideo({ src, poster, title }) {
 
     const controller = new AbortController();
 
-    fetch(assetPath(currentSrc), { method: "HEAD", signal: controller.signal })
+    fetch(currentSrc, { method: "HEAD", signal: controller.signal })
       .then((response) => {
         if (response.ok) {
           setStatus("ready");
-          return;
-        }
-
-        const fallback = videoFallbackFor(currentSrc);
-        if (fallback && fallback !== currentSrc) {
-          setCurrentSrc(fallback);
           return;
         }
 
@@ -95,12 +63,6 @@ function ProjectVideo({ src, poster, title }) {
       })
       .catch((error) => {
         if (error.name === "AbortError") return;
-
-        const fallback = videoFallbackFor(currentSrc);
-        if (fallback && fallback !== currentSrc) {
-          setCurrentSrc(fallback);
-          return;
-        }
 
         setStatus("error");
       });
@@ -122,18 +84,13 @@ function ProjectVideo({ src, poster, title }) {
       className="case-video"
       controls
       preload="metadata"
-      poster={assetPath(poster)}
+      poster={poster}
       aria-label={`${title} demo video`}
       onError={() => {
-        const fallback = videoFallbackFor(currentSrc);
-        if (fallback && fallback !== currentSrc) {
-          setCurrentSrc(fallback);
-          return;
-        }
         setStatus("error");
       }}
     >
-      <source src={assetPath(currentSrc)} type="video/mp4" />
+      <source src={currentSrc} type="video/mp4" />
     </video>
   );
 }

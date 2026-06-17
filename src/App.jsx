@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import ProjectCaseStudyModal from "./components/ProjectCaseStudyModal.jsx";
-import { projectFilters, projects } from "./data/projects.js";
-import { assetPath } from "./utils/assets.js";
+import { projects } from "./data/projects.js";
 
 const contact = {
   email: "sjaswanth486@gmail.com",
@@ -218,14 +217,6 @@ function RoleCycle() {
   );
 }
 
-function projectImageFallbackFor(src) {
-  if (!src) return "";
-  const coverMatch = src.match(/\/images\/projects\/covers\/(.+)\.jpg$/);
-  if (coverMatch) return `/projects/${coverMatch[1]}.png`;
-  if (src.endsWith(".jpg")) return src.replace(/\.jpg$/, ".png");
-  return "";
-}
-
 function SafeProjectImage({ src, alt, ...props }) {
   const [currentSrc, setCurrentSrc] = useState(src);
   const [hasError, setHasError] = useState(false);
@@ -242,14 +233,9 @@ function SafeProjectImage({ src, alt, ...props }) {
   return (
     <img
       {...props}
-      src={assetPath(currentSrc)}
+      src={currentSrc}
       alt={alt}
       onError={() => {
-        const fallback = projectImageFallbackFor(currentSrc);
-        if (fallback && fallback !== currentSrc) {
-          setCurrentSrc(fallback);
-          return;
-        }
         setHasError(true);
       }}
     />
@@ -300,7 +286,15 @@ function scrollToSection(event, id) {
   if (!section) return;
 
   event.preventDefault();
-  section.scrollIntoView({ behavior: "smooth", block: "start" });
+  const top = section.getBoundingClientRect().top + window.scrollY;
+  window.scrollTo({ top, behavior: "smooth" });
+  window.setTimeout(() => {
+    if (Math.abs(section.getBoundingClientRect().top) <= 8) return;
+
+    window.scrollTo(0, top);
+    document.documentElement.scrollTop = top;
+    document.body.scrollTop = top;
+  }, 450);
   window.history.pushState(null, "", `#${id}`);
 }
 
@@ -327,7 +321,10 @@ function MenuOverlay({ open, onClose, activeSection }) {
               ref={index === 0 ? firstLinkRef : null}
               href={item.href}
               key={item.label}
-              onClick={onClose}
+              onClick={(event) => {
+                onClose();
+                scrollToSection(event, item.href.slice(1));
+              }}
               tabIndex={open ? 0 : -1}
               className={activeSection === item.href.slice(1) ? "is-active" : ""}
             >
@@ -408,7 +405,15 @@ function Header() {
     <>
       <header className={`header ${menuOpen ? "header--menu-open" : ""} ${scrolled ? "header--scrolled" : ""}`}>
         <div className="header-inner">
-          <a className="brand" href="#hero" aria-label="Kovi Varun home" onClick={() => setMenuOpen(false)}>
+          <a
+            className="brand"
+            href="#hero"
+            aria-label="Kovi Varun home"
+            onClick={(event) => {
+              setMenuOpen(false);
+              scrollToSection(event, "hero");
+            }}
+          >
             <span>kv</span>
             <small>AI Automation Engineer</small>
           </a>
@@ -418,6 +423,7 @@ function Header() {
                 className={activeSection === item.href.slice(1) ? "is-active" : ""}
                 href={item.href}
                 key={item.label}
+                onClick={(event) => scrollToSection(event, item.href.slice(1))}
               >
                 {item.label}
               </a>
@@ -472,7 +478,7 @@ function Hero() {
             <a className="button button--dark" href="#work" onClick={(event) => scrollToSection(event, "work")}>
               View Work <ArrowIcon />
             </a>
-            <a className="button button--light" href={assetPath("/resume.pdf")} target="_blank" rel="noreferrer">
+            <a className="button button--light" href="/resume.pdf" target="_blank" rel="noreferrer">
               View Resume <ArrowIcon />
             </a>
             <a className="button button--light" href="#contact" onClick={(event) => scrollToSection(event, "contact")}>
@@ -490,7 +496,7 @@ function Hero() {
           {prefersReducedMotion ? (
             <img
               className="hero-video-poster"
-              src={assetPath("/images/hero-intro-poster.jpg")}
+              src="/images/hero-intro-poster.jpg"
               alt=""
               aria-hidden="true"
               width="1672"
@@ -505,10 +511,10 @@ function Hero() {
               loop
               playsInline
               preload="metadata"
-              poster={assetPath("/images/hero-intro-poster.jpg")}
+              poster="/images/hero-intro-poster.jpg"
               aria-hidden="true"
             >
-              <source src={assetPath("/videos/hero-intro-desktop.mp4")} type="video/mp4" />
+              <source src="/videos/hero-intro-desktop.mp4" type="video/mp4" />
             </video>
           )}
         </div>
@@ -521,27 +527,25 @@ function Hero() {
   );
 }
 
-function ProjectCard({ project, onSelect, index }) {
+function ProjectCard({ project, onOpen }) {
   const stack = project.stack ?? [];
 
-  const openCard = (trigger) => onSelect(project, trigger);
   const openCardFromKeyboard = (event) => {
     if (event.target !== event.currentTarget) return;
     if (event.key !== "Enter" && event.key !== " ") return;
 
     event.preventDefault();
-    openCard(event.currentTarget);
+    onOpen(event.currentTarget);
   };
 
   return (
     <div
       className="project-card"
       role="button"
+      aria-label={`Open ${project.title} case study`}
       tabIndex={0}
-      onClick={(event) => openCard(event.currentTarget)}
+      onClick={(event) => onOpen(event.currentTarget)}
       onKeyDown={openCardFromKeyboard}
-      data-reveal
-      style={{ transitionDelay: `${index * 80}ms` }}
     >
       <article>
         <div className="project-image">
@@ -592,7 +596,17 @@ function Work() {
   const [activeFilter, setActiveFilter] = useState("All");
   const [selectedProject, setSelectedProject] = useState(null);
   const lastProjectTriggerRef = useRef(null);
+
+  const filters = [
+    { label: "All", value: "All" },
+    { label: "RAG", value: "RAG" },
+    { label: "Workflow", value: "Workflow" },
+    { label: "Email", value: "Email" },
+    { label: "HR", value: "HR" },
+  ];
+
   const normalize = (value) => String(value || "").trim().toLowerCase();
+
   const filteredProjects = useMemo(() => {
     if (activeFilter === "All") return projects;
 
@@ -626,11 +640,12 @@ function Work() {
           text="A focused selection of AI workflows that research, retrieve, classify, and evaluate information."
         />
         <div className="project-filters" aria-label="Filter projects by category" data-reveal>
-          {projectFilters.map((filter) => (
+          {filters.map((filter) => (
             <button
-              className={activeFilter === filter.value ? "is-active" : ""}
+              className={activeFilter === filter.value ? "is-active active" : ""}
               type="button"
               key={filter.value}
+              aria-pressed={activeFilter === filter.value}
               onClick={() => setActiveFilter(filter.value)}
             >
               {filter.label}
@@ -638,12 +653,11 @@ function Work() {
           ))}
         </div>
         <div className="project-grid">
-          {filteredProjects.map((project, index) => (
+          {filteredProjects.map((project) => (
             <ProjectCard
               project={project}
               key={project.slug}
-              onSelect={openProject}
-              index={index}
+              onOpen={(trigger) => openProject(project, trigger)}
             />
           ))}
         </div>
@@ -662,7 +676,7 @@ function About() {
       <div className="container about-grid">
         <figure className="about-portrait portfolio-image-frame" data-reveal>
           <img
-            src={assetPath("/images/about-working.jpg")}
+            src="/images/about-working.jpg"
             alt="Kovi Varun Jaswanth Sai working on AI automation systems"
             width="1672"
             height="941"
@@ -903,10 +917,10 @@ function Resume() {
             LLM projects.
           </p>
           <div className="resume-actions">
-            <a className="button button--dark" href={assetPath("/resume.pdf")} target="_blank" rel="noreferrer">
+            <a className="button button--dark" href="/resume.pdf" target="_blank" rel="noreferrer">
               View Resume <ArrowIcon />
             </a>
-            <a className="button button--light" href={assetPath("/resume.pdf")} download>
+            <a className="button button--light" href="/resume.pdf" download>
               Download Resume <ArrowIcon />
             </a>
           </div>
@@ -916,80 +930,6 @@ function Resume() {
             <div><dt>Format</dt><dd>PDF</dd></div>
           </dl>
         </div>
-      </div>
-    </section>
-  );
-}
-
-function Contact() {
-  const [copied, setCopied] = useState(false);
-
-  const copyEmail = async () => {
-    let didCopy = false;
-
-    try {
-      await navigator.clipboard.writeText(contact.email);
-      didCopy = true;
-    } catch {
-      const textArea = document.createElement("textarea");
-      textArea.value = contact.email;
-      textArea.setAttribute("readonly", "");
-      textArea.style.position = "fixed";
-      textArea.style.opacity = "0";
-      document.body.appendChild(textArea);
-      textArea.select();
-      didCopy = document.execCommand("copy");
-      document.body.removeChild(textArea);
-    }
-
-    if (!didCopy) return;
-
-    setCopied(true);
-    window.setTimeout(() => setCopied(false), 2000);
-  };
-
-  return (
-    <section className="contact" id="contact">
-      <div className="container">
-        <div className="contact-top" data-reveal>
-          <p className="section-kicker section-kicker--light"><span>05</span>Contact</p>
-          <p>Have a workflow, product idea, or role in mind?</p>
-        </div>
-        <div className="contact-main" data-reveal>
-          <h2 aria-label="Let's build useful AI systems.">
-            {["Let's", "build", "useful", "AI", "systems."].map((word, index) => (
-              <span style={{ transitionDelay: `${index * 90}ms` }} key={word}>{word}</span>
-            ))}
-          </h2>
-          <a className="contact-email" href={`mailto:${contact.email}`}>
-            Email Me <ArrowIcon />
-          </a>
-        </div>
-        <div className="contact-details">
-          <div>
-            <span>Email</span>
-            <div className="contact-email-row">
-              <a href={`mailto:${contact.email}`}>{contact.email}</a>
-              <button type="button" onClick={copyEmail}>
-                {copied ? "Copied" : "Copy"}
-              </button>
-            </div>
-          </div>
-          <div>
-            <span>Location</span>
-            <p>Hyderabad, India</p>
-          </div>
-          <div>
-            <span>Profiles</span>
-            <p>
-              <a href={contact.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
-              <a href={contact.github} target="_blank" rel="noreferrer">GitHub</a>
-            </p>
-          </div>
-        </div>
-      </div>
-      <div className={`copy-toast ${copied ? "is-visible" : ""}`} role="status" aria-live="polite">
-        Copied
       </div>
     </section>
   );
@@ -1046,7 +986,7 @@ function Footer() {
             <span>Profiles</span>
             <a href={contact.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
             <a href={contact.github} target="_blank" rel="noreferrer">GitHub</a>
-            <a href={assetPath("/resume.pdf")} target="_blank" rel="noreferrer">Resume</a>
+            <a href="/resume.pdf" target="_blank" rel="noreferrer">Resume</a>
           </div>
           <div>
             <span>Focus</span>
@@ -1064,7 +1004,9 @@ function Footer() {
         <div className="footer-inner">
           <p>&copy; 2026 Kovi Varun Jaswanth Sai</p>
           <p>AI Automation Engineer</p>
-          <a href="#hero">Back to top <span aria-hidden="true">up</span></a>
+          <a href="#hero" onClick={(event) => scrollToSection(event, "hero")}>
+            Back to top <span aria-hidden="true">up</span>
+          </a>
         </div>
       </div>
       <div className={`copy-toast ${copied ? "is-visible" : ""}`} role="status" aria-live="polite">
