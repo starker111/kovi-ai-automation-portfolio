@@ -451,7 +451,6 @@ function Header() {
 }
 
 function Hero() {
-  const prefersReducedMotion = usePrefersReducedMotion();
   const heroPosterAlt = "Kovi Varun Jaswanth Sai AI Automation Engineer portfolio hero";
 
   return (
@@ -495,16 +494,7 @@ function Hero() {
         </div>
 
         <div className="hero-video-panel hero-reveal hero-reveal--delay-2">
-          {prefersReducedMotion || !HERO_VIDEO_URL ? (
-            <img
-              className="hero-video-poster"
-              src="/images/hero-intro-poster.jpg"
-              alt={heroPosterAlt}
-              width="1672"
-              height="941"
-              fetchPriority="high"
-            />
-          ) : (
+          {HERO_VIDEO_URL ? (
             <video
               className="hero-video"
               autoPlay
@@ -517,6 +507,15 @@ function Hero() {
             >
               <source src={HERO_VIDEO_URL} type="video/mp4" />
             </video>
+          ) : (
+            <img
+              className="hero-video-poster hero-video-fallback"
+              src="/images/hero-intro-poster.jpg"
+              alt={heroPosterAlt}
+              width="1672"
+              height="941"
+              fetchPriority="high"
+            />
           )}
         </div>
       </div>
