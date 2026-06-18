@@ -1,1 +1,1 @@
-export const HERO_VIDEO_URL = "https://fyhjluxy52x2dilk.private.blob.vercel-storage.com/hero-intro-desktop.mp4?vercel-blob-valid-until=1781775515383&vercel-blob-delegation=eyJzdG9yZUlkIjoic3RvcmVfRnloSmx1eFk1MngyRGlsSyIsIm93bmVySWQiOiJ0ZWFtX3pxN25XMm9zRE5iMWFQbm9DaDNZNlUxcyIsInBhdGhuYW1lIjoiKiIsIm9wZXJhdGlvbnMiOlsiZ2V0IiwiaGVhZCJdLCJ2YWxpZFVudGlsIjoxNzgxODE4NTg1MTgxLCJpYXQiOjE3ODE3NzUzODUzNjd9.-3br4lgiGNf7LSX_XmEPK8_4PYCspz4PV4uj9R1D_10&vercel-blob-signature=jb_S0-jrgXjgK18UDDAgYPt85lW3K6OVRP7_GA847Vg";
+export const HERO_VIDEO_URL = import.meta.env.VITE_HERO_VIDEO_URL || "";

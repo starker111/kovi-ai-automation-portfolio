@@ -501,7 +501,7 @@ function Hero() {
               muted
               loop
               playsInline
-              preload="metadata"
+              preload="auto"
               poster="/images/hero-intro-poster.jpg"
               aria-hidden="true"
             >
