@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
+import VisitorCounter from "./components/VisitorCounter.jsx";
 import { HERO_VIDEO_URL } from "./config/media.js";
 import { projects } from "./data/projects.js";
 
@@ -493,6 +494,7 @@ function Hero() {
             <span>Available for internships and roles</span>
             <span>2026 Portfolio</span>
             <span>Hyderabad, India</span>
+            <VisitorCounter />
           </div>
         </div>
 
