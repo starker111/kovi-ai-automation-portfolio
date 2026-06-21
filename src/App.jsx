@@ -494,34 +494,38 @@ function Hero() {
             <span>Available for internships and roles</span>
             <span>2026 Portfolio</span>
             <span>Hyderabad, India</span>
-            <VisitorCounter />
           </div>
         </div>
 
-        <div className="hero-video-panel hero-reveal hero-reveal--delay-2">
-          {HERO_VIDEO_URL ? (
-            <video
-              className="hero-video"
-              autoPlay
-              muted
-              loop
-              playsInline
-              preload="auto"
-              poster="/images/hero-intro-poster.jpg"
-              aria-hidden="true"
-            >
-              <source src={HERO_VIDEO_URL} type="video/mp4" />
-            </video>
-          ) : (
-            <img
-              className="hero-video-poster hero-video-fallback"
-              src="/images/hero-intro-poster.jpg"
-              alt={heroPosterAlt}
-              width="1672"
-              height="941"
-              fetchPriority="high"
-            />
-          )}
+        <div className="hero-visual">
+          <div className="hero-visitor-counter hero-reveal hero-reveal--delay-2">
+            <VisitorCounter />
+          </div>
+          <div className="hero-video-panel hero-reveal hero-reveal--delay-2">
+            {HERO_VIDEO_URL ? (
+              <video
+                className="hero-video"
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="auto"
+                poster="/images/hero-intro-poster.jpg"
+                aria-hidden="true"
+              >
+                <source src={HERO_VIDEO_URL} type="video/mp4" />
+              </video>
+            ) : (
+              <img
+                className="hero-video-poster hero-video-fallback"
+                src="/images/hero-intro-poster.jpg"
+                alt={heroPosterAlt}
+                width="1672"
+                height="941"
+                fetchPriority="high"
+              />
+            )}
+          </div>
         </div>
       </div>
       <div className="hero-rule" aria-hidden="true">

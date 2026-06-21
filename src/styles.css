@@ -606,6 +606,16 @@ svg {
   color: var(--muted);
 }
 
+.hero-visual {
+  min-width: 0;
+}
+
+.hero-visitor-counter {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 14px;
+}
+
 .hero-meta > span:first-child::before {
   width: 7px;
   height: 7px;
@@ -666,6 +676,19 @@ svg {
   transform: translateY(-2px);
 }
 
+.visitor-counter-error {
+  opacity: 0.72;
+}
+
+.visitor-counter-error .visitor-counter-orb {
+  background: #777;
+  animation: none;
+}
+
+.visitor-counter-error .visitor-counter-orb::after {
+  display: none;
+}
+
 .visitor-counter-orb {
   position: relative;
   width: 0.58rem;
@@ -716,12 +739,22 @@ svg {
   white-space: nowrap;
 }
 
-.visitor-counter-main strong {
+.visitor-counter-number-window {
+  min-width: 1.5ch;
+  height: 1.15em;
+  display: inline-grid;
+  align-items: end;
+  overflow: hidden;
+  line-height: 1;
+}
+
+.visitor-counter-number {
   min-width: 1.4ch;
   display: inline-block;
   font-size: 1.15em;
   font-variant-numeric: tabular-nums;
   letter-spacing: -0.04em;
+  animation: visitorDigitRoll 220ms var(--ease) both;
 }
 
 .visitor-counter-spark {
@@ -788,6 +821,19 @@ svg {
   100% {
     opacity: 0;
     transform: translateY(-12px) scale(0.96);
+  }
+}
+
+@keyframes visitorDigitRoll {
+  from {
+    opacity: 0.2;
+    filter: blur(2px);
+    transform: translateY(75%);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
   }
 }
 
@@ -2715,6 +2761,11 @@ svg {
     gap: 45px;
   }
 
+  .hero-visual {
+    width: 100%;
+    order: -1;
+  }
+
   .hero-content {
     padding-top: 0;
   }
@@ -2758,13 +2809,7 @@ svg {
     font-size: 8px;
   }
 
-  .visitor-counter {
-    flex-basis: 100%;
-    margin-top: 4px;
-  }
-
   .hero-video-panel {
-    order: -1;
     aspect-ratio: 16 / 9;
   }
 
@@ -2998,11 +3043,9 @@ svg {
     margin-top: 10px;
   }
 
-  .hero-meta > .visitor-counter {
-    width: 100%;
-    display: inline-flex;
-    justify-content: flex-start;
-    border-radius: 1rem;
+  .hero-visitor-counter {
+    justify-content: flex-end;
+    margin-bottom: 10px;
   }
 
   .visitor-counter-label,

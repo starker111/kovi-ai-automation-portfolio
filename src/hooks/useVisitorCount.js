@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 const VISITOR_ID_KEY = "portfolio_visitor_id";
-const LAST_COUNT_KEY = "portfolio_last_visitor_count";
+const LAST_COUNT_KEY = "portfolio_last_visitor_count_v2";
 
 let visitRequest = null;
 
@@ -50,11 +50,12 @@ function registerVisit() {
     body: JSON.stringify({ visitorId }),
   })
     .then(async (response) => {
+      const data = await response.json();
+
       if (!response.ok) {
-        throw new Error("Visitor counter request failed");
+        throw new Error(data.error || "Visitor counter request failed");
       }
 
-      const data = await response.json();
       const count = typeof data.count === "number" ? data.count : null;
 
       if (count === null || !Number.isFinite(count) || count < 0) {
@@ -68,6 +69,10 @@ function registerVisit() {
       }
 
       return count;
+    })
+    .catch((error) => {
+      visitRequest = null;
+      throw error;
     });
 
   return visitRequest;

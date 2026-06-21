@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useVisitorCount } from "../hooks/useVisitorCount.js";
 
-function useAnimatedNumber(target, start = 0, duration = 1200) {
+function useAnimatedNumber(target, start = 0, duration = 1650) {
   const [value, setValue] = useState(start);
 
   useEffect(() => {
@@ -22,7 +22,7 @@ function useAnimatedNumber(target, start = 0, duration = 1200) {
 
     const tick = (now) => {
       const progress = Math.min((now - startTime) / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
+      const eased = 1 - Math.pow(1 - progress, 5);
       setValue(Math.round(from + (target - from) * eased));
 
       if (progress < 1) {
@@ -40,22 +40,22 @@ function useAnimatedNumber(target, start = 0, duration = 1200) {
 export default function VisitorCounter({ className = "" }) {
   const { count, previousCount, loading, error } = useVisitorCount();
   const targetCount = typeof count === "number" ? count : previousCount;
-  const animatedCount = useAnimatedNumber(targetCount, previousCount, 1200);
+  const animatedCount = useAnimatedNumber(targetCount, previousCount, 1650);
   const increased =
     typeof count === "number" &&
     typeof previousCount === "number" &&
     count > previousCount;
 
-  if (error) return null;
-
   const accessibleLabel =
     typeof count === "number"
       ? `Viewed by ${count} unique visitors`
+      : error
+        ? "Visitor count temporarily unavailable"
       : "Tracking unique visits";
 
   return (
     <span
-      className={`visitor-counter ${increased ? "visitor-counter-new" : ""} ${className}`.trim()}
+      className={`visitor-counter ${increased ? "visitor-counter-new" : ""} ${error ? "visitor-counter-error" : ""} ${className}`.trim()}
       title="Counts unique browsers/devices, not personal identities."
       aria-label={accessibleLabel}
     >
@@ -63,11 +63,20 @@ export default function VisitorCounter({ className = "" }) {
       <span className="visitor-counter-copy" aria-hidden="true">
         <span className="visitor-counter-label">Live portfolio reach</span>
         <span className="visitor-counter-main">
-          {loading || count === null ? (
+          {error ? (
+            "Visitor count temporarily unavailable"
+          ) : loading || count === null ? (
             "Tracking unique visits"
           ) : (
             <>
-              <strong>{animatedCount.toLocaleString()}</strong>
+              <span className="visitor-counter-number-window">
+                <strong
+                  className="visitor-counter-number"
+                  key={animatedCount}
+                >
+                  {animatedCount.toLocaleString()}
+                </strong>
+              </span>
               <span>unique visitors</span>
             </>
           )}
