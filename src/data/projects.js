@@ -47,7 +47,7 @@ export const projects = [
     description: "An autonomous SRE and FinOps command center for simulating incidents, operational reports, and automation-first system workflows.",
     outcome: "Shows a recruiter-facing AI operations product with live dashboards, incident simulation, structured reports, and command-center style presentation.",
     stack: ["Next.js", "AI Workflows", "SRE", "FinOps", "Automation", "Reports"],
-    cardImage: "/images/projects/covers/opspilot-ai.jpg",
+    cardImage: "/images/projects/covers/opspilot-ai.png",
     liveUrl: "https://opspilot-ai-coral.vercel.app/",
     github: "",
   },

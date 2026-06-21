@@ -418,6 +418,7 @@ svg {
 }
 
 .hero {
+  position: relative;
   min-height: 100svh;
   display: flex;
   flex-direction: column;
@@ -607,13 +608,18 @@ svg {
 }
 
 .hero-visual {
+  position: relative;
   min-width: 0;
 }
 
 .hero-visitor-counter {
+  position: absolute;
+  z-index: 4;
+  top: 16px;
+  right: 16px;
   display: flex;
   justify-content: flex-end;
-  margin-bottom: 14px;
+  pointer-events: none;
 }
 
 .hero-meta > span:first-child::before {
@@ -648,6 +654,7 @@ svg {
     inset 0 1px 0 rgba(255, 255, 255, 0.65);
   transform: translateZ(0);
   transition: transform 320ms ease, border-color 320ms ease, box-shadow 320ms ease;
+  pointer-events: auto;
 }
 
 .visitor-counter::before {
@@ -754,7 +761,13 @@ svg {
   font-size: 1.15em;
   font-variant-numeric: tabular-nums;
   letter-spacing: -0.04em;
-  animation: visitorDigitRoll 220ms var(--ease) both;
+  transform-origin: center bottom;
+  transition: filter 180ms ease, transform 180ms var(--ease);
+}
+
+.visitor-counter-number.is-counting {
+  filter: blur(0.25px);
+  transform: translateY(-1px) scale(1.035);
 }
 
 .visitor-counter-spark {
@@ -821,19 +834,6 @@ svg {
   100% {
     opacity: 0;
     transform: translateY(-12px) scale(0.96);
-  }
-}
-
-@keyframes visitorDigitRoll {
-  from {
-    opacity: 0.2;
-    filter: blur(2px);
-    transform: translateY(75%);
-  }
-  to {
-    opacity: 1;
-    filter: blur(0);
-    transform: translateY(0);
   }
 }
 
@@ -3044,8 +3044,8 @@ svg {
   }
 
   .hero-visitor-counter {
-    justify-content: flex-end;
-    margin-bottom: 10px;
+    top: 10px;
+    right: 10px;
   }
 
   .visitor-counter-label,

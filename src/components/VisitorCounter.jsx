@@ -39,8 +39,10 @@ function useAnimatedNumber(target, start = 0, duration = 1650) {
 
 export default function VisitorCounter({ className = "" }) {
   const { count, previousCount, loading, error } = useVisitorCount();
-  const targetCount = typeof count === "number" ? count : previousCount;
-  const animatedCount = useAnimatedNumber(targetCount, previousCount, 1650);
+  const targetCount = typeof count === "number" ? count : 0;
+  const animatedCount = useAnimatedNumber(targetCount, 0, 1900);
+  const isCounting =
+    typeof count === "number" && animatedCount < count;
   const increased =
     typeof count === "number" &&
     typeof previousCount === "number" &&
@@ -71,8 +73,7 @@ export default function VisitorCounter({ className = "" }) {
             <>
               <span className="visitor-counter-number-window">
                 <strong
-                  className="visitor-counter-number"
-                  key={animatedCount}
+                  className={`visitor-counter-number ${isCounting ? "is-counting" : ""}`}
                 >
                   {animatedCount.toLocaleString()}
                 </strong>
