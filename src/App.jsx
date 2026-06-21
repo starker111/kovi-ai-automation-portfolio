@@ -1,5 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import ProjectCaseStudyModal from "./components/ProjectCaseStudyModal.jsx";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { HERO_VIDEO_URL } from "./config/media.js";
 import { projects } from "./data/projects.js";
 
@@ -89,7 +88,7 @@ const capabilityCards = [
     description:
       "Reliable automations that connect business tools, route information, and reduce repeated manual work.",
     tools: ["n8n", "Make", "Zapier", "Gmail API", "Sheets API", "Webhooks"],
-    example: "Smart Email Classification",
+    example: "Autonomous Business Workflow Bot",
   },
   {
     number: "03",
@@ -97,7 +96,7 @@ const capabilityCards = [
     description:
       "Backend and frontend systems for building maintainable automation products and internal tools.",
     tools: ["Python", "FastAPI", "React", "REST APIs", "Playwright", "Pandas"],
-    example: "Multi-Agent Research Assistant",
+    example: "Multi-Agent Research Automation",
   },
   {
     number: "04",
@@ -105,7 +104,7 @@ const capabilityCards = [
     description:
       "Storage, retrieval, classification, scoring, summaries, and reporting for AI-enabled operations.",
     tools: ["ChromaDB", "PostgreSQL", "BigQuery", "Excel", "Power BI"],
-    example: "AI Resume Screening Workflow",
+    example: "OpsPilot AI",
   },
 ];
 
@@ -315,7 +314,10 @@ function MenuOverlay({ open, onClose, activeSection }) {
       aria-label="Site navigation"
     >
       <div className="menu-shell">
-        <p className="menu-label">Navigation</p>
+        <div className="menu-brand">
+          <img src="/branding/portfolio-logo-mark.png" alt="" width="56" height="56" />
+          <p className="menu-label">Navigation</p>
+        </div>
         <nav className="menu-nav">
           {navItems.map((item, index) => (
             <a
@@ -415,7 +417,8 @@ function Header() {
               scrollToSection(event, "hero");
             }}
           >
-            <span>kv</span>
+            <img src="/branding/portfolio-logo-mark.png" alt="" width="38" height="38" />
+            <span>KV</span>
             <small>AI Automation Engineer</small>
           </a>
           <nav className="desktop-nav" aria-label="Primary navigation">
@@ -527,25 +530,29 @@ function Hero() {
   );
 }
 
-function ProjectCard({ project, onOpen }) {
+function ProjectCard({ project, index }) {
   const stack = project.stack ?? [];
+  const openProject = () => {
+    window.open(project.liveUrl, "_blank", "noopener,noreferrer");
+  };
 
   const openCardFromKeyboard = (event) => {
     if (event.target !== event.currentTarget) return;
     if (event.key !== "Enter" && event.key !== " ") return;
 
     event.preventDefault();
-    onOpen(event.currentTarget);
+    openProject();
   };
 
   return (
     <div
       className="project-card"
       role="button"
-      aria-label={`Open ${project.title} case study`}
+      aria-label={`Launch ${project.title} interface`}
       tabIndex={0}
-      onClick={(event) => onOpen(event.currentTarget)}
+      onClick={openProject}
       onKeyDown={openCardFromKeyboard}
+      style={{ "--project-delay": `${index * 80}ms` }}
     >
       <article>
         <div className="project-image">
@@ -558,11 +565,20 @@ function ProjectCard({ project, onOpen }) {
             decoding="async"
           />
           <span className="project-index">{project.number}</span>
+          <span className="project-status">Live interface</span>
           <span className="project-arrow"><ArrowIcon /></span>
           <div className="project-overlay">
             <p>{project.outcome}</p>
             <div className="project-overlay-actions">
-              <span>View project <ArrowIcon /></span>
+              <button
+                type="button"
+                onClick={(event) => {
+                  event.stopPropagation();
+                  openProject();
+                }}
+              >
+                Launch interface <ArrowIcon />
+              </button>
               {project.github && (
                 <a
                   href={project.github}
@@ -583,7 +599,8 @@ function ProjectCard({ project, onOpen }) {
           </div>
           <span>2026</span>
         </div>
-        <p className="project-outcome">{project.description}</p>
+        <p className="project-description">{project.description}</p>
+        <p className="project-outcome"><span>Outcome</span>{project.outcome}</p>
         <ul className="tool-list" aria-label={`${project.title} tools`}>
           {stack.map((tool) => <li key={tool}>{tool}</li>)}
         </ul>
@@ -594,15 +611,13 @@ function ProjectCard({ project, onOpen }) {
 
 function Work() {
   const [activeFilter, setActiveFilter] = useState("All");
-  const [selectedProject, setSelectedProject] = useState(null);
-  const lastProjectTriggerRef = useRef(null);
 
   const filters = [
     { label: "All", value: "All" },
-    { label: "RAG", value: "RAG" },
+    { label: "Research", value: "Research" },
     { label: "Workflow", value: "Workflow" },
-    { label: "Email", value: "Email" },
-    { label: "HR", value: "HR" },
+    { label: "RAG", value: "RAG" },
+    { label: "Ops AI", value: "Ops AI" },
   ];
 
   const normalize = (value) => String(value || "").trim().toLowerCase();
@@ -621,14 +636,6 @@ function Work() {
       return categoryMatch || tagMatch;
     });
   }, [activeFilter]);
-  const openProject = useCallback((project, trigger) => {
-    lastProjectTriggerRef.current = trigger;
-    setSelectedProject(project);
-  }, []);
-  const closeProject = useCallback(() => {
-    setSelectedProject(null);
-    window.setTimeout(() => lastProjectTriggerRef.current?.focus(), 0);
-  }, []);
 
   return (
     <section className="section work" id="work">
@@ -653,11 +660,11 @@ function Work() {
           ))}
         </div>
         <div className="project-grid">
-          {filteredProjects.map((project) => (
+          {filteredProjects.map((project, index) => (
             <ProjectCard
               project={project}
               key={project.slug}
-              onOpen={(trigger) => openProject(project, trigger)}
+              index={index}
             />
           ))}
         </div>
@@ -665,7 +672,6 @@ function Work() {
           <p className="project-empty" role="status">No projects found for this filter.</p>
         )}
       </div>
-      <ProjectCaseStudyModal project={selectedProject} onClose={closeProject} />
     </section>
   );
 }
@@ -1002,7 +1008,10 @@ function Footer() {
           </div>
         </div>
         <div className="footer-inner">
-          <p>&copy; 2026 Kovi Varun Jaswanth Sai</p>
+          <p className="footer-signature">
+            <img src="/branding/portfolio-logo-mark.png" alt="" width="28" height="28" />
+            &copy; 2026 Kovi Varun Jaswanth Sai
+          </p>
           <p>AI Automation Engineer</p>
           <a href="#hero" onClick={(event) => scrollToSection(event, "hero")}>
             Back to top <span aria-hidden="true">up</span>
@@ -1091,7 +1100,7 @@ function PageLoader() {
 
   return (
     <div className="page-loader" aria-hidden="true">
-      <span>kv</span>
+      <img src="/branding/portfolio-logo-mark.png" alt="" width="96" height="96" />
     </div>
   );
 }
