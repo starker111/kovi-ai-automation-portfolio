@@ -2267,36 +2267,70 @@ svg {
 
 .certification-grid {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 12px;
 }
 
 .certification-card {
-  min-height: 190px;
+  min-height: 206px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 20px;
+  gap: 28px;
   padding: clamp(18px, 2.2vw, 24px);
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.62);
   box-shadow: 0 14px 34px rgba(17, 17, 17, 0.045);
+  transition: border-color 260ms ease, box-shadow 260ms ease, transform 320ms var(--ease);
 }
 
-.certification-card span {
+.certification-card:hover,
+.certification-card:focus-within {
+  border-color: rgba(0, 0, 0, 0.18);
+  box-shadow: 0 18px 42px rgba(17, 17, 17, 0.07);
+  transform: translateY(-3px);
+}
+
+.certification-card-top {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.certification-card span,
+.certification-card strong {
   color: var(--muted);
   font-size: 9px;
   font-weight: 700;
   letter-spacing: 0.11em;
+  line-height: 1.25;
+  text-transform: uppercase;
+}
+
+.certification-card strong {
+  padding: 6px 8px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(246, 246, 243, 0.72);
+  text-align: right;
 }
 
 .certification-card h3 {
   color: var(--ink);
-  font-size: clamp(18px, 1.55vw, 24px);
+  font-size: clamp(18px, 1.45vw, 23px);
   font-weight: 500;
   letter-spacing: -0.035em;
-  line-height: 1.16;
+  line-height: 1.18;
+}
+
+.certification-card p {
+  margin-top: 14px;
+  color: #555853;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.45;
 }
 
 .resume-grid {

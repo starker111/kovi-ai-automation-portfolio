@@ -151,11 +151,31 @@ const capabilityCards = [
 ];
 
 const certifications = [
-  "J.P. Morgan - Quantitative Research Job Simulation",
-  "Claude 101",
-  "Vista Equity Partners - AI in Action Job Simulation",
-  "Tata - GenAI Powered Data Analytics Job Simulation",
-  "AI Fluency for Small Businesses",
+  {
+    title: "Quantitative Research Job Simulation",
+    issuer: "J.P. Morgan",
+    type: "Job Simulation",
+  },
+  {
+    title: "Claude 101",
+    issuer: "Claude",
+    type: "AI Fundamentals",
+  },
+  {
+    title: "AI in Action Job Simulation",
+    issuer: "Vista Equity Partners",
+    type: "Job Simulation",
+  },
+  {
+    title: "GenAI Powered Data Analytics Job Simulation",
+    issuer: "Tata",
+    type: "Job Simulation",
+  },
+  {
+    title: "AI Fluency for Small Businesses",
+    issuer: "Issuer not specified in resume",
+    type: "Certification",
+  },
 ];
 
 const systemsBoard = [
@@ -607,7 +627,7 @@ function ProjectCard({ project, index }) {
         <div className="project-image">
           <SafeProjectImage
             src={project.cardImage}
-            alt={`${project.title} project cover`}
+            alt={project.imageAlt ?? `${project.title} project cover`}
             width="1536"
             height="1024"
             loading="lazy"
@@ -1014,18 +1034,24 @@ function Certifications() {
         <SectionIntro
           index="04"
           label="Certifications"
-          title="Current certifications from the latest resume."
-          text="The portfolio lists only the certifications included in the uploaded resume."
+          title="Certifications & simulations."
+          text="A concise set of current credentials from the uploaded resume, organized for quick recruiter review."
         />
         <div className="certification-grid" data-reveal>
           {certifications.map((certification, index) => (
             <article
               className="certification-card"
-              key={certification}
+              key={`${certification.issuer}-${certification.title}`}
               style={{ transitionDelay: `${index * 70}ms` }}
             >
-              <span>{String(index + 1).padStart(2, "0")}</span>
-              <h3>{certification}</h3>
+              <div className="certification-card-top">
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                <strong>{certification.type}</strong>
+              </div>
+              <div>
+                <h3>{certification.title}</h3>
+                <p>{certification.issuer}</p>
+              </div>
             </article>
           ))}
         </div>

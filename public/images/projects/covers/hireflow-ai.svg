@@ -1,0 +1,95 @@
+<svg width="1536" height="1024" viewBox="0 0 1536 1024" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">HireFlow AI recruitment automation dashboard</title>
+  <desc id="desc">Professional dashboard illustration showing AI resume screening, candidate ranking, and recruiter shortlist workflow.</desc>
+  <rect width="1536" height="1024" fill="#F6F6F3"/>
+  <rect x="112" y="104" width="1312" height="816" rx="34" fill="#FFFFFF" stroke="#D8D8D0" stroke-width="2"/>
+  <rect x="112" y="104" width="1312" height="96" rx="34" fill="#F0F1EC"/>
+  <path d="M112 166C112 131.759 139.759 104 174 104H1362C1396.24 104 1424 131.759 1424 166V200H112V166Z" fill="#EDEFE9"/>
+  <circle cx="168" cy="152" r="12" fill="#1F1F1F"/>
+  <circle cx="208" cy="152" r="12" fill="#A7B0A2"/>
+  <circle cx="248" cy="152" r="12" fill="#D6B66A"/>
+  <text x="312" y="162" fill="#1B1B1B" font-family="Inter, Arial, sans-serif" font-size="25" font-weight="700">HireFlow AI</text>
+  <text x="312" y="190" fill="#696B66" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="600" letter-spacing="2">RECRUITMENT AUTOMATION AGENT</text>
+
+  <rect x="176" y="264" width="344" height="512" rx="24" fill="#FAFAF8" stroke="#DFDFD7" stroke-width="2"/>
+  <text x="220" y="322" fill="#1E1E1E" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="700">Incoming resumes</text>
+  <text x="220" y="352" fill="#70736D" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="500">Gmail PDF extraction</text>
+
+  <g filter="url(#shadow)">
+    <rect x="220" y="398" width="256" height="92" rx="18" fill="#FFFFFF" stroke="#D8D8D0"/>
+    <rect x="244" y="423" width="52" height="52" rx="12" fill="#EEF3F0"/>
+    <path d="M259 442H281M259 455H289M259 468H278" stroke="#4E6659" stroke-width="5" stroke-linecap="round"/>
+    <text x="316" y="438" fill="#222222" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="700">Resume PDF</text>
+    <text x="316" y="466" fill="#747771" font-family="Inter, Arial, sans-serif" font-size="14">Candidate profile</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="220" y="518" width="256" height="92" rx="18" fill="#FFFFFF" stroke="#D8D8D0"/>
+    <rect x="244" y="543" width="52" height="52" rx="12" fill="#F5F0E3"/>
+    <path d="M259 562H284M259 575H291M259 588H277" stroke="#94723A" stroke-width="5" stroke-linecap="round"/>
+    <text x="316" y="558" fill="#222222" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="700">Job description</text>
+    <text x="316" y="586" fill="#747771" font-family="Inter, Arial, sans-serif" font-size="14">Role requirements</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="220" y="638" width="256" height="92" rx="18" fill="#FFFFFF" stroke="#D8D8D0"/>
+    <rect x="244" y="663" width="52" height="52" rx="12" fill="#ECEFF5"/>
+    <path d="M259 682H283M259 695H291M259 708H274" stroke="#58657C" stroke-width="5" stroke-linecap="round"/>
+    <text x="316" y="678" fill="#222222" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="700">Recruiter inbox</text>
+    <text x="316" y="706" fill="#747771" font-family="Inter, Arial, sans-serif" font-size="14">Trigger workflow</text>
+  </g>
+
+  <path d="M535 514H620" stroke="#B9BDB4" stroke-width="4" stroke-linecap="round"/>
+  <path d="M602 492L624 514L602 536" stroke="#B9BDB4" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <g filter="url(#shadowLarge)">
+    <rect x="624" y="288" width="288" height="448" rx="28" fill="#111111"/>
+    <rect x="650" y="314" width="236" height="396" rx="22" fill="#181818" stroke="#303030"/>
+    <circle cx="768" cy="420" r="72" fill="#F6F6F3"/>
+    <path d="M725 420C725 396.252 744.252 377 768 377C791.748 377 811 396.252 811 420C811 443.748 791.748 463 768 463C744.252 463 725 443.748 725 420Z" stroke="#111111" stroke-width="9"/>
+    <path d="M768 355V382M768 458V485M704 420H731M805 420H832M722 374L741 393M795 447L814 466M814 374L795 393M741 447L722 466" stroke="#111111" stroke-width="8" stroke-linecap="round"/>
+    <text x="694" y="546" fill="#FFFFFF" font-family="Inter, Arial, sans-serif" font-size="25" font-weight="700">LLM Rubric</text>
+    <text x="694" y="584" fill="#C9CBC5" font-family="Inter, Arial, sans-serif" font-size="16">Matched skills</text>
+    <text x="694" y="616" fill="#C9CBC5" font-family="Inter, Arial, sans-serif" font-size="16">Missing skills</text>
+    <text x="694" y="648" fill="#C9CBC5" font-family="Inter, Arial, sans-serif" font-size="16">Evidence + score</text>
+  </g>
+
+  <path d="M928 514H1013" stroke="#B9BDB4" stroke-width="4" stroke-linecap="round"/>
+  <path d="M995 492L1017 514L995 536" stroke="#B9BDB4" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <rect x="1016" y="264" width="344" height="512" rx="24" fill="#FAFAF8" stroke="#DFDFD7" stroke-width="2"/>
+  <text x="1060" y="322" fill="#1E1E1E" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="700">Ranked shortlist</text>
+  <text x="1060" y="352" fill="#70736D" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="500">Structured recruiter outputs</text>
+
+  <g filter="url(#shadow)">
+    <rect x="1060" y="402" width="256" height="82" rx="18" fill="#FFFFFF" stroke="#D8D8D0"/>
+    <circle cx="1100" cy="443" r="20" fill="#E7EFEA"/>
+    <text x="1091" y="451" fill="#304C3D" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="800">1</text>
+    <text x="1138" y="433" fill="#222222" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="700">Strong match</text>
+    <text x="1138" y="462" fill="#747771" font-family="Inter, Arial, sans-serif" font-size="14">Score 92 / 100</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="1060" y="512" width="256" height="82" rx="18" fill="#FFFFFF" stroke="#D8D8D0"/>
+    <circle cx="1100" cy="553" r="20" fill="#F5F0E3"/>
+    <text x="1090" y="561" fill="#866833" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="800">2</text>
+    <text x="1138" y="543" fill="#222222" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="700">Interview fit</text>
+    <text x="1138" y="572" fill="#747771" font-family="Inter, Arial, sans-serif" font-size="14">Score 84 / 100</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="1060" y="622" width="256" height="82" rx="18" fill="#FFFFFF" stroke="#D8D8D0"/>
+    <circle cx="1100" cy="663" r="20" fill="#ECEFF5"/>
+    <text x="1090" y="671" fill="#4E5F7C" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="800">3</text>
+    <text x="1138" y="653" fill="#222222" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="700">Needs review</text>
+    <text x="1138" y="682" fill="#747771" font-family="Inter, Arial, sans-serif" font-size="14">Score 76 / 100</text>
+  </g>
+
+  <rect x="625" y="790" width="286" height="54" rx="27" fill="#F0F1EC" stroke="#D8D8D0"/>
+  <text x="684" y="825" fill="#1F1F1F" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="700">Gmail - Sheets - Calendar</text>
+
+  <defs>
+    <filter id="shadow" x="0" y="0" width="1536" height="1024" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="14" stdDeviation="12" flood-color="#111111" flood-opacity="0.08"/>
+    </filter>
+    <filter id="shadowLarge" x="0" y="0" width="1536" height="1024" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="22" stdDeviation="18" flood-color="#111111" flood-opacity="0.16"/>
+    </filter>
+  </defs>
+</svg>

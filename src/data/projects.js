@@ -43,15 +43,17 @@ export const projects = [
     category: "HR Automation",
     tags: ["Workflow", "HR Automation", "Resume Screening"],
     description:
-      "Built an AI recruitment agent that screens and ranks 20 resumes within 5 seconds per trigger against a job description.",
+      "Built an AI recruitment agent that screens and ranks 20 resumes within 5 seconds per trigger by extracting PDF resume text from Gmail and scoring candidates against a job description.",
     problem:
-      "Recruiters need faster resume triage without hallucinated skill matches or unsupported candidate recommendations.",
+      "Reduces manual HR screening effort and speeds up early-stage candidate filtering.",
     system:
-      "Gmail PDF extraction, Google Sheets, Google Calendar, LLM scoring, and JavaScript logic produce evidence-required candidate evaluations.",
+      "Extracts resumes from Gmail, evaluates them against job descriptions using an LLM rubric, logs structured candidate records, and supports interview scheduling workflows.",
     outcome:
-      "Returns matched skills, missing skills, score, recommendation, and recruiter summary with a rubric designed to prevent fake matches.",
+      "Shows practical AI automation applied to recruiting operations with structured, explainable outputs.",
     stack: ["n8n", "Gmail API", "Google Sheets", "Google Calendar", "LLMs", "JavaScript"],
-    cardImage: "/_archive/projects-root/resume-screening.jpg",
+    cardImage: "/images/projects/covers/hireflow-ai.svg",
+    imageAlt:
+      "HireFlow AI project cover showing AI resume screening, candidate ranking, and recruiter shortlist workflow",
     liveUrl: "",
     github: "",
   },
