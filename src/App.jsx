@@ -4,73 +4,114 @@ import { HERO_VIDEO_URL } from "./config/media.js";
 import { projects } from "./data/projects.js";
 
 const contact = {
-  email: "sjaswanth486@gmail.com",
+  email: "kovivarunjashwanthsai@gmail.com",
   linkedin: "https://www.linkedin.com/in/kovi-varun-jaswanth-sai-588599302/",
   github: "https://github.com/starker111",
+  portfolio: "https://kovi-ai-automation-portfolio.vercel.app/",
 };
 
 const navItems = [
   { label: "Home", href: "#hero" },
   { label: "Work", href: "#work" },
   { label: "About", href: "#about" },
-  { label: "Capabilities", href: "#capabilities" },
+  { label: "Skills", href: "#skills" },
+  { label: "Certifications", href: "#certifications" },
   { label: "Resume", href: "#resume" },
   { label: "Contact", href: "#contact" },
 ];
 
-const skillRows = [
+const skillGroups = [
   {
-    label: "AI / LLM / Agents",
-    direction: "left",
+    category: "Programming",
+    skills: ["Python", "JavaScript", "SQL"],
+  },
+  {
+    category: "AI / LLM",
     skills: [
       "OpenAI API",
+      "Groq API",
+      "Claude",
       "Gemini",
-      "Groq",
       "Ollama",
       "LangChain",
       "LlamaIndex",
-      "AI Agents",
       "Prompt Engineering",
       "RAG",
-      "Vector Search",
-      "Embeddings",
-      "LLM Workflows",
+      "Function Calling",
+      "JSON Output Parsing",
     ],
   },
   {
-    label: "Automation / Integrations",
-    direction: "right",
+    category: "Agents and Automation",
     skills: [
+      "Multi-Agent Systems",
+      "Agentic Workflows",
       "n8n",
       "Make",
       "Zapier",
       "Webhooks",
-      "Gmail API",
-      "Google Sheets API",
-      "Google Calendar API",
-      "APIs",
-      "Email Automation",
-      "Resume Screening",
+      "REST APIs",
+      "Workflow Orchestration",
     ],
   },
   {
-    label: "Engineering / Data / Tools",
-    direction: "left",
+    category: "Business Automation",
     skills: [
-      "Python",
-      "FastAPI",
-      "JavaScript",
-      "React",
-      "REST APIs",
-      "Playwright",
-      "Pandas",
-      "PostgreSQL",
-      "ChromaDB",
-      "BigQuery",
-      "Excel",
-      "Power BI",
-      "GitHub",
+      "Lead Qualification",
+      "Customer Engagement Workflows",
+      "CRM Follow-up Automation",
+      "Email Automation",
+      "HR Automation",
+      "Resume Screening",
+      "Interview Scheduling",
     ],
+  },
+  {
+    category: "Backend and Data",
+    skills: [
+      "FastAPI",
+      "PostgreSQL",
+      "MongoDB",
+      "Pandas",
+      "NumPy",
+      "Scikit-learn",
+      "Data Cleaning",
+      "EDA",
+      "Google BigQuery",
+    ],
+  },
+  {
+    category: "Frontend and Tools",
+    skills: [
+      "React.js",
+      "Streamlit",
+      "Tailwind CSS",
+      "Responsive UI/UX",
+      "Git",
+      "GitHub",
+      "VS Code",
+      "ChromaDB",
+      "FAISS",
+      "PDF Text Extraction",
+    ],
+  },
+];
+
+const skillRows = [
+  {
+    label: "AI / LLM",
+    direction: "left",
+    skills: skillGroups[1].skills,
+  },
+  {
+    label: "Agents and Automation",
+    direction: "right",
+    skills: skillGroups[2].skills,
+  },
+  {
+    label: "Backend and Data",
+    direction: "left",
+    skills: skillGroups[4].skills,
   },
 ];
 
@@ -81,7 +122,7 @@ const capabilityCards = [
     description:
       "Grounded assistants, RAG pipelines, agent workflows, local models, and practical LLM integrations.",
     tools: ["OpenAI", "Gemini", "Ollama", "LangChain", "RAG", "Agents"],
-    example: "Document Intelligence RAG",
+    example: "AI-Powered Document Intelligence System",
   },
   {
     number: "02",
@@ -89,14 +130,14 @@ const capabilityCards = [
     description:
       "Reliable automations that connect business tools, route information, and reduce repeated manual work.",
     tools: ["n8n", "Make", "Zapier", "Gmail API", "Sheets API", "Webhooks"],
-    example: "Autonomous Business Workflow Bot",
+    example: "Autonomous Business Workflow Automation System",
   },
   {
     number: "03",
     title: "Engineering & APIs",
     description:
       "Backend and frontend systems for building maintainable automation products and internal tools.",
-    tools: ["Python", "FastAPI", "React", "REST APIs", "Playwright", "Pandas"],
+    tools: ["Python", "FastAPI", "React", "REST APIs", "JavaScript", "Pandas"],
     example: "Multi-Agent Research Automation",
   },
   {
@@ -104,9 +145,17 @@ const capabilityCards = [
     title: "Data & Intelligence",
     description:
       "Storage, retrieval, classification, scoring, summaries, and reporting for AI-enabled operations.",
-    tools: ["ChromaDB", "PostgreSQL", "BigQuery", "Excel", "Power BI"],
+    tools: ["ChromaDB", "PostgreSQL", "MongoDB", "BigQuery", "Pandas"],
     example: "OpsPilot AI",
   },
+];
+
+const certifications = [
+  "J.P. Morgan - Quantitative Research Job Simulation",
+  "Claude 101",
+  "Vista Equity Partners - AI in Action Job Simulation",
+  "Tata - GenAI Powered Data Analytics Job Simulation",
+  "AI Fluency for Small Businesses",
 ];
 
 const systemsBoard = [
@@ -137,8 +186,8 @@ const systemsBoard = [
 ];
 
 const aboutStats = [
-  { value: 4, suffix: "", label: "AI workflow projects", numeric: true },
-  { value: 4, suffix: "", label: "capability areas", numeric: true },
+  { value: 5, suffix: "", label: "resume-backed AI projects", numeric: true },
+  { value: 6, suffix: "", label: "skill categories", numeric: true },
   { value: "n8n + Python + RAG", label: "practical stack" },
   { value: "Hyderabad, India", label: "location" },
 ];
@@ -149,21 +198,7 @@ const education = [
     status: "Present",
     institution: "Guru Nanak Institutions Technical Campus",
     years: "2023 - 2027",
-    score: "CGPA: 7",
-  },
-  {
-    title: "MPC",
-    status: "Completed",
-    institution: "Narayana Junior College",
-    years: "2023",
-    score: "91%",
-  },
-  {
-    title: "CBSE",
-    status: "Completed",
-    institution: "H.A.L School",
-    years: "2021",
-    score: "85%",
+    score: "GPA: 7.0 / 10.0",
   },
 ];
 
@@ -183,9 +218,9 @@ const skills = [
 
 const roleVariants = [
   "AI Automation Engineer",
-  "Workflow Architect",
+  "Agentic AI Builder",
   "RAG Systems Builder",
-  "LLM Automation Developer",
+  "Workflow Orchestration Builder",
 ];
 
 function ArrowIcon() {
@@ -384,7 +419,7 @@ function Header() {
   }, []);
 
   useEffect(() => {
-    const sections = ["hero", "work", "about", "capabilities", "resume", "contact"]
+    const sections = ["hero", "work", "about", "skills", "certifications", "resume", "contact"]
       .map((id) => document.getElementById(id))
       .filter(Boolean);
 
@@ -462,38 +497,44 @@ function Hero() {
       <div className="container hero-grid">
         <div className="hero-content">
           <p className="eyebrow hero-reveal">
-            Kovi Varun Jaswanth Sai / AI Automation Engineer / Hyderabad, India
+            Kovi Varun Jaswanth Sai / AI Automation Engineer / Hyderabad, Telangana, India
           </p>
           <div className="hero-reveal hero-reveal--delay-1">
             <RoleCycle />
           </div>
           <h1 className="hero-reveal hero-reveal--delay-1">
-            AI Automation
-            <span>Engineer</span>
+            Agentic AI
+            <span>Automation Engineer</span>
           </h1>
           <p className="hero-subhead hero-reveal hero-reveal--delay-2">
-            I build AI automation systems that turn repeated work into reliable workflows.
+            LLM agents, n8n workflows, RAG systems, and business process automation.
           </p>
           <p className="hero-copy hero-reveal hero-reveal--delay-2">
-            Using n8n, Python, LLMs, RAG pipelines, APIs, and data tools, I build practical
-            systems for email automation, document intelligence, resume screening, and workflow
-            operations.
+            B.Tech Artificial Intelligence and Data Science student graduating in 2027, focused
+            on production-style AI systems using LLMs, APIs, vector search, and structured
+            automation outputs.
           </p>
           <div className="hero-actions hero-reveal hero-reveal--delay-3">
             <a className="button button--dark" href="#work" onClick={(event) => scrollToSection(event, "work")}>
               View Work <ArrowIcon />
             </a>
-            <a className="button button--light" href="/resume.pdf" target="_blank" rel="noreferrer">
-              View Resume <ArrowIcon />
+            <a className="button button--light" href="/resume.pdf" download>
+              Download Resume <ArrowIcon />
             </a>
-            <a className="button button--light" href="#contact" onClick={(event) => scrollToSection(event, "contact")}>
-              Contact Me <ArrowIcon />
+            <a className="button button--light" href={contact.github} target="_blank" rel="noreferrer">
+              GitHub <ArrowIcon />
+            </a>
+            <a className="button button--light" href={contact.linkedin} target="_blank" rel="noreferrer">
+              LinkedIn <ArrowIcon />
+            </a>
+            <a className="button button--light" href={`mailto:${contact.email}`}>
+              Email <ArrowIcon />
             </a>
           </div>
           <div className="hero-meta hero-reveal hero-reveal--delay-3">
             <span>Available for internships and roles</span>
             <span>2026 Portfolio</span>
-            <span>Hyderabad, India</span>
+            <span>Hyderabad, Telangana, India</span>
           </div>
         </div>
 
@@ -538,7 +579,9 @@ function Hero() {
 
 function ProjectCard({ project, index }) {
   const stack = project.stack ?? [];
+  const hasProjectLink = Boolean(project.liveUrl);
   const openProject = () => {
+    if (!hasProjectLink) return;
     window.open(project.liveUrl, "_blank", "noopener,noreferrer");
   };
 
@@ -552,11 +595,11 @@ function ProjectCard({ project, index }) {
 
   return (
     <div
-      className="project-card"
-      role="button"
-      aria-label={`Launch ${project.title} interface`}
-      tabIndex={0}
-      onClick={openProject}
+      className={`project-card ${hasProjectLink ? "" : "project-card--static"}`}
+      role={hasProjectLink ? "button" : undefined}
+      aria-label={hasProjectLink ? `Launch ${project.title} interface` : undefined}
+      tabIndex={hasProjectLink ? 0 : undefined}
+      onClick={hasProjectLink ? openProject : undefined}
       onKeyDown={openCardFromKeyboard}
       style={{ "--project-delay": `${index * 80}ms` }}
     >
@@ -571,20 +614,22 @@ function ProjectCard({ project, index }) {
             decoding="async"
           />
           <span className="project-index">{project.number}</span>
-          <span className="project-status">Live interface</span>
-          <span className="project-arrow"><ArrowIcon /></span>
+          <span className="project-status">{hasProjectLink ? "Live interface" : "Resume project"}</span>
+          {hasProjectLink && <span className="project-arrow"><ArrowIcon /></span>}
           <div className="project-overlay">
             <p>{project.outcome}</p>
             <div className="project-overlay-actions">
-              <button
-                type="button"
-                onClick={(event) => {
-                  event.stopPropagation();
-                  openProject();
-                }}
-              >
-                Launch interface <ArrowIcon />
-              </button>
+              {hasProjectLink && (
+                <button
+                  type="button"
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    openProject();
+                  }}
+                >
+                  Launch interface <ArrowIcon />
+                </button>
+              )}
               {project.github && (
                 <a
                   href={project.github}
@@ -606,7 +651,11 @@ function ProjectCard({ project, index }) {
           <span>2026</span>
         </div>
         <p className="project-description">{project.description}</p>
-        <p className="project-outcome"><span>Outcome</span>{project.outcome}</p>
+        <div className="project-detail-grid" aria-label={`${project.title} project details`}>
+          <p><span>Problem solved</span>{project.problem}</p>
+          <p><span>What it does</span>{project.system}</p>
+          <p><span>Recruiter outcome</span>{project.outcome}</p>
+        </div>
         <ul className="tool-list" aria-label={`${project.title} tools`}>
           {stack.map((tool) => <li key={tool}>{tool}</li>)}
         </ul>
@@ -622,6 +671,7 @@ function Work() {
     { label: "All", value: "All" },
     { label: "Research", value: "Research" },
     { label: "Workflow", value: "Workflow" },
+    { label: "HR Automation", value: "HR Automation" },
     { label: "RAG", value: "RAG" },
     { label: "Ops AI", value: "Ops AI" },
   ];
@@ -702,15 +752,14 @@ function About() {
         </figure>
         <div className="about-copy" data-reveal>
           <p className="section-kicker"><span>02</span>About</p>
-          <h2>Practical AI, built around useful outcomes.</h2>
+          <h2>Practical AI automation systems, not only demos.</h2>
           <p className="about-lead">
-            I am a B.Tech AI &amp; Data Science student building practical AI automation systems.
-            My work focuses on turning repeated manual tasks into reliable workflows using LLMs,
-            APIs, RAG pipelines, and n8n.
+            I build practical AI automation systems that connect LLMs, n8n workflows, APIs,
+            vector search, and structured outputs into workflows people can actually use.
           </p>
           <p className="about-secondary">
-            I care about clear system design, grounded outputs, and automation that people can
-            actually trust in day-to-day operations.
+            My focus is agentic systems, RAG applications, and workflow orchestration for email
+            automation, document intelligence, resume screening, and business process automation.
           </p>
           <div className="skill-tags" aria-label="Skills">
             {skills.map((skill) => <span key={skill}>{skill}</span>)}
@@ -783,7 +832,7 @@ function Capabilities() {
   return (
     <section
       className="section capabilities capability-engine"
-      id="capabilities"
+      id="skills"
       ref={sectionRef}
       onPointerMove={handlePointerMove}
     >
@@ -797,14 +846,25 @@ function Capabilities() {
       </div>
       <div className="container capability-shell">
         <div className="capability-header" data-reveal>
-          <p className="section-kicker section-kicker--light"><span>03</span>Capabilities</p>
+          <p className="section-kicker section-kicker--light"><span>03</span>Skills</p>
           <div>
-            <h2>Capabilities built for real AI automation.</h2>
+            <h2>Skills grouped by how AI automation systems are built.</h2>
             <p>
-              A practical stack for connecting AI, workflows, data, APIs, documents, emails,
-              and business operations into working systems.
+              A practical stack for LLM agents, n8n workflows, RAG systems, business automation,
+              APIs, data pipelines, and recruiter-facing interfaces.
             </p>
           </div>
+        </div>
+
+        <div className="skill-category-grid" data-reveal>
+          {skillGroups.map((group) => (
+            <article className="skill-category-card" key={group.category}>
+              <h3>{group.category}</h3>
+              <ul>
+                {group.skills.map((skill) => <li key={skill}>{skill}</li>)}
+              </ul>
+            </article>
+          ))}
         </div>
 
         <div className="capability-marquee" data-reveal>
@@ -859,7 +919,7 @@ function Capabilities() {
           <div className="systems-board-header" data-reveal>
             <div>
               <span>AI Systems Board</span>
-              <h3>AI Systems Board &mdash; How my automations work</h3>
+              <h3>AI Systems Board - How my automations work</h3>
             </div>
             <div>
               <p>
@@ -920,7 +980,7 @@ function Resume() {
     <section className="section resume" id="resume">
       <div className="container resume-grid">
         <div data-reveal>
-          <p className="section-kicker"><span>04</span>Resume</p>
+          <p className="section-kicker"><span>05</span>Resume</p>
           <h2>Experience and projects, distilled.</h2>
         </div>
         <div className="resume-copy" data-reveal>
@@ -941,6 +1001,33 @@ function Resume() {
             <div><dt>Location</dt><dd>Hyderabad, India</dd></div>
             <div><dt>Format</dt><dd>PDF</dd></div>
           </dl>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Certifications() {
+  return (
+    <section className="section certifications" id="certifications">
+      <div className="container">
+        <SectionIntro
+          index="04"
+          label="Certifications"
+          title="Current certifications from the latest resume."
+          text="The portfolio lists only the certifications included in the uploaded resume."
+        />
+        <div className="certification-grid" data-reveal>
+          {certifications.map((certification, index) => (
+            <article
+              className="certification-card"
+              key={certification}
+              style={{ transitionDelay: `${index * 70}ms` }}
+            >
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <h3>{certification}</h3>
+            </article>
+          ))}
         </div>
       </div>
     </section>
@@ -978,7 +1065,7 @@ function Footer() {
     <footer className="footer" id="contact">
       <div className="container footer-shell">
         <div className="footer-top" data-reveal>
-          <p className="section-kicker section-kicker--light"><span>05</span>Contact</p>
+          <p className="section-kicker section-kicker--light"><span>06</span>Contact</p>
           <h2 aria-label="Let's build useful AI systems.">
             {["Let's", "build", "useful", "AI", "systems."].map((word, index) => (
               <span style={{ transitionDelay: `${index * 90}ms` }} key={word}>{word}</span>
@@ -1141,6 +1228,7 @@ export default function App() {
         <Work />
         <About />
         <Capabilities />
+        <Certifications />
         <Resume />
       </main>
       <Footer />
